@@ -1,0 +1,26 @@
+{
+  "name": "@quick-cart-2025/auth-service-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@quick-cart-2025/auth-service"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/auth-service-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@quick-cart-2025/auth-service:build",
+          "@quick-cart-2025/auth-service:serve"
+        ]
+      }
+    }
+  }
+}
