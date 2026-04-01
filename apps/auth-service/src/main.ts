@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import { errorMiddleware } from "../../../packages/error-handler/error.middleware";
 
 const host = process.env.HOST ?? "localhost";
 
@@ -12,13 +14,16 @@ app.use(
     credentials: true,
   }),
 );
+app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send({ message: "Hello API" });
 });
 
-const port = process.env.PORT || 6001;
+app.use(errorMiddleware);
 
+const port = process.env.PORT || 6001;
 const server = app.listen(port, () => {
   console.log(`[ ready ] http://${host}:${port}`);
 });
